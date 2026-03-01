@@ -1,0 +1,10 @@
+# Repository
+/content/
+
+# Build results
+bin/
+obj/
+build/
+
+# Secrets
+.env

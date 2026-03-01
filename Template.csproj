@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageType>Template</PackageType>
+
+		<PackageId>Snowyyd.Templates</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>snowyyd</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/snowyyd/Csharp.Templates.git</RepositoryUrl>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeContentInPack>true</IncludeContentInPack>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<NoDefaultExcludes>true</NoDefaultExcludes>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="templates/**/*" Exclude="templates/**/build/**;templates/**/.git" />
+		<Compile Remove="**/*" />
+	</ItemGroup>
+
+</Project>
