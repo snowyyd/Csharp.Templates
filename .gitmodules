@@ -1,0 +1,8 @@
+[submodule "templates/sdk"]
+	path = templates/sdk
+	url = https://github.com/snowyyd/csharp-template.git
+	branch = main
+[submodule "templates/asp.net"]
+	path = templates/asp.net
+	url = https://github.com/snowyyd/csharp-template.git
+	branch = asp.net
