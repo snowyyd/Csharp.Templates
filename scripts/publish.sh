@@ -48,16 +48,7 @@ restore_template() {
     echo -e "${GREEN}Restoring ${YELLOW}${template_path}${RESET}"
     cd "$template_path"
 
-    current_branch="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
-
-    if [ -z "$current_branch" ]; then
-      # detached HEAD
-      git reset --hard
-    else
-      git fetch origin
-      git reset --hard "origin/${current_branch}"
-    fi
-
+    git reset --hard HEAD
     git clean -fdx
 
     # submodules
