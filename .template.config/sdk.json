@@ -3,7 +3,7 @@
 	"author": "snowyyd",
 	"identity": "Snowyyd.CsTemplate",
 	"name": "snowyyd's C# Template",
-	"shortName": "snowyyd.aspnet",
+	"shortName": "snowyyd.cs",
 	"tags": {
 		"language": "C#",
 		"type": "project"
