@@ -5,7 +5,7 @@
     <PackageType>Template</PackageType>
 
     <PackageId>Snowyyd.Templates</PackageId>
-    <Version>1.5.1</Version>
+    <Version>1.5.2</Version>
     <Authors>snowyyd</Authors>
     <Description>My collection of C# templates</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

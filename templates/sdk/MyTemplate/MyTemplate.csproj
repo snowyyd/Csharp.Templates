@@ -1,4 +1,4 @@
-<Project Sdk="Snowyyd.NET.Sdk/1.4.1">
+<Project Sdk="Snowyyd.NET.Sdk/1.4.2">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
