@@ -16,7 +16,7 @@
   ],
   "tasks": [
     {
-      "label": "$(build) Build Project: MyTemplate",
+      "label": "$(build) Build .NET Projects",
       "command": "dotnet",
       "type": "shell",
       "args": [
@@ -25,16 +25,10 @@
         "${input:buildConfig}",
       ],
       "group": "build",
-      "presentation": {
-        // "reveal": "silent"
-      },
-      "problemMatcher": "$msCompile",
-      "options": {
-        "cwd": "${workspaceFolder}/MyTemplate"
-      }
+      "problemMatcher": "$msCompile"
     },
     {
-      "label": "$(tools) Publish Project: MyTemplate",
+      "label": "$(tools) Publish .NET Projects",
       "command": "dotnet",
       "type": "shell",
       "args": [
@@ -45,13 +39,7 @@
         "linux-x64",
       ],
       "group": "build",
-      "presentation": {
-        // "reveal": "silent"
-      },
-      "problemMatcher": "$msCompile",
-      "options": {
-        "cwd": "${workspaceFolder}/MyTemplate"
-      }
+      "problemMatcher": "$msCompile"
     }
   ]
 }
