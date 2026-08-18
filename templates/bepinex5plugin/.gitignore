@@ -1,7 +1,7 @@
 # Build results
 bin/
 obj/
-build/
+artifacts/
 
 # References
 References/

@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="templates/**/*" Exclude="templates/**/build/**;templates/**/bin/**;templates/**/obj/**;templates/**/.git" />
+    <Content Include="templates/**/*" Exclude="templates/**/artifacts/**;templates/**/.git" />
     <Compile Remove="**/*" />
   </ItemGroup>
 

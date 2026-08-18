@@ -66,7 +66,7 @@ set +a
   echo -e "${GREEN}Packing NuGet...${RESET}"
   dotnet pack -c Release
 
-  NUPKG_PATH="$ROOT_DIR/bin/Release/$PACKAGE_ID.$VERSION.nupkg"
+  NUPKG_PATH="$ROOT_DIR/artifacts/package/release/$PACKAGE_ID.$VERSION.nupkg"
   if [[ -z "$NUPKG_PATH" ]]; then
     echo -e "${YELLOW}.nupkg not found in ${GREEN}${NUPKG_PATH}${RESET}"
     exit 5

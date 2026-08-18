@@ -1,6 +1,5 @@
 <Project>
   <PropertyGroup>
-    <BaseOutputPath>build/bin/</BaseOutputPath>
-    <BaseIntermediateOutputPath>build/obj/</BaseIntermediateOutputPath>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
   </PropertyGroup>
 </Project>
