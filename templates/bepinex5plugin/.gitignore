@@ -3,8 +3,5 @@ bin/
 obj/
 build/
 
-# Secrets
-.env
-
 # References
 References/
