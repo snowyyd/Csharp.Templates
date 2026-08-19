@@ -1,0 +1,54 @@
+<Project>
+  <!-- Target to configure xwin for NativeAOT cross-compilation from Linux to Windows -->
+  <Target Name="SetupXWin"
+          AfterTargets="SetupOSSpecificProps"
+          BeforeTargets="LinkNative"
+          Condition="'$(PublishAot)' == 'true' AND $([MSBuild]::IsOSPlatform(&quot;Linux&quot;)) AND '$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.StartsWith(&quot;win-&quot;))">
+
+    <PropertyGroup>
+      <!-- Extract MSVC architecture notation: 'x64', 'arm64', 'x86' -->
+      <!-- https://learn.microsoft.com/en-us/dotnet/core/rid-catalog#windows-rids -->
+      <CrossCompileArch>$(RuntimeIdentifier.Replace('win-', ''))</CrossCompileArch>
+
+      <!-- Map to xwin CLI architecture parameter: 'x86_64', 'aarch64', 'x86' -->
+      <XWinTargetArch>$(CrossCompileArch)</XWinTargetArch>
+      <XWinTargetArch Condition="'$(CrossCompileArch)' == 'x64'">x86_64</XWinTargetArch>
+      <XWinTargetArch Condition="'$(CrossCompileArch)' == 'arm64'">aarch64</XWinTargetArch>
+
+      <!-- Directory where xwin downloads and splats CRT/SDK headers and libraries -->
+      <XWinCache Condition="'$(XWinCache)' == ''">$(MSBuildThisFileDirectory).xwin-cache/</XWinCache>
+
+      <CppLinker>lld-link</CppLinker>
+    </PropertyGroup>
+
+    <!-- Fetch CRT and Windows SDK via xwin if not cached -->
+    <Message Condition="!Exists('$(XWinCache)splat/sdk/lib/ucrt/$(CrossCompileArch)')"
+             Importance="high"
+             Text="Windows SDK/CRT cache missing. Fetching via xwin for '$(XWinTargetArch)'..." />
+
+    <Exec Condition="!Exists('$(XWinCache)splat/sdk/lib/ucrt/$(CrossCompileArch)')"
+          ContinueOnError="false"
+          ConsoleToMsBuild="true"
+          Command="xwin --accept-license --cache-dir &quot;$(XWinCache)&quot; --arch $(XWinTargetArch) splat --preserve-ms-arch-notation --include-debug-symbols" />
+
+    <!-- Configure Linker Arguments -->
+    <ItemGroup>
+      <!-- Filter out unsupported/conflicting MSVC arguments -->
+      <_NoExpLinkerArg Include="@(LinkerArg->Replace('/NOEXP', ''))" />
+      <_NoExpLinkerArg Remove="@(_NoExpLinkerArg)" Condition="$([System.String]::new('%(Identity)').StartsWith('/SOURCELINK:'))" />
+      <LinkerArg Remove="@(LinkerArg)" />
+
+      <!-- Root directories for LLVM MSVC toolchain auto-discovery -->
+      <LinkerArg Include="/vctoolsdir:$(XWinCache)splat/crt" />
+      <LinkerArg Include="/winsdkdir:$(XWinCache)splat/sdk" />
+
+      <!-- Explicit LIBPATHs required to prevent duplicate CRT symbol conflicts -->
+      <LinkerArg Include="/LIBPATH:$(XWinCache)splat/crt/lib/$(CrossCompileArch)" />
+      <LinkerArg Include="/LIBPATH:$(XWinCache)splat/sdk/lib/ucrt/$(CrossCompileArch)" />
+      <LinkerArg Include="/LIBPATH:$(XWinCache)splat/sdk/lib/um/$(CrossCompileArch)" />
+
+      <!-- Re-inject filtered linker args -->
+      <LinkerArg Include="@(_NoExpLinkerArg)" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json.schemastore.org/template.json",
+  "author": "snowyyd",
+  "identity": "Snowyyd.xwin",
+  "name": "snowyyd's C# Crossbuild",
+  "shortName": "snowyyd.xwin",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "classifications": [
+    "Solution",
+    "AOT",
+    "xwin",
+    "Custom"
+  ],
+  "preferNameDirectory": true,
+  "sourceName": "MyTemplate",
+  "sources": [
+    {
+      "exclude": [
+        ".template.config/**"
+      ]
+    }
+  ],
+  "symbols": {
+    "solutionName": {
+      "type": "parameter",
+      "datatype": "string",
+      "fileRename": "MySolution",
+      "defaultValue": "MySolution"
+    },
+    "licenseHolder": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "LICENSE_HOLDER",
+      "defaultValue": "snowyyd"
+    }
+  }
+}

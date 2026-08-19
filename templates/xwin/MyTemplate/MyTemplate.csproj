@@ -1,0 +1,16 @@
+<Project Sdk="Snowyyd.NET.Sdk/1.4.2">
+
+  <PropertyGroup>
+    <!-- Project -->
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+    <!-- Publish -->
+    <PublishAot>true</PublishAot>
+
+    <!-- Lang features -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+  </PropertyGroup>
+
+</Project>
