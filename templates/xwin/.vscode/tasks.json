@@ -36,7 +36,7 @@
         "-c",
         "${input:buildConfig}",
         "-r",
-        "linux-x64",
+        "win-x64",
       ],
       "group": "build",
       "problemMatcher": "$msCompile"
