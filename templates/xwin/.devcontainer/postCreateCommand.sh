@@ -1,8 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
+TOOLS_VERSION="20"
+
 # Install system dependencies
-sudo apt-get update && sudo apt-get install -y clang lld
+sudo apt-get update && sudo apt-get install -y "clang-${TOOLS_VERSION}" "lld-${TOOLS_VERSION}" "llvm-${TOOLS_VERSION}"
+
+# Create symlinks
+for bin in /usr/bin/*-"${TOOLS_VERSION}"; do
+  target=$(basename "$bin" "-${TOOLS_VERSION}")
+  sudo ln -sf "$bin" "/usr/local/bin/$target"
+done
 
 # Install and execute xwin toolchain
 # Fetch and install the latest xwin binary directly from GitHub releases

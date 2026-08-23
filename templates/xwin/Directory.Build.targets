@@ -2,7 +2,7 @@
   <!-- Target to configure xwin for NativeAOT cross-compilation from Linux to Windows -->
   <Target Name="SetupXWin"
           AfterTargets="SetupOSSpecificProps"
-          BeforeTargets="LinkNative"
+          BeforeTargets="LinkNative;ArchiveNative"
           Condition="'$(PublishAot)' == 'true' AND $([MSBuild]::IsOSPlatform('Linux')) AND '$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.StartsWith('win-'))">
 
     <PropertyGroup>
@@ -18,7 +18,9 @@
       <!-- Directory where xwin downloads and splats CRT/SDK headers and libraries -->
       <XWinCache Condition="'$(XWinCache)' == ''">$(MSBuildThisFileDirectory).xwin-cache/</XWinCache>
 
+      <!-- LLVM tools -->
       <CppLinker>lld-link</CppLinker>
+      <CppLibCreator>llvm-lib</CppLibCreator>
     </PropertyGroup>
 
     <!-- Fetch CRT and Windows SDK via xwin if not cached -->
