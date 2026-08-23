@@ -1,14 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-TOOLS_VERSION="20"
+LLVM_VERSION="20"
 
 # Install system dependencies
-sudo apt-get update && sudo apt-get install -y "clang-${TOOLS_VERSION}" "lld-${TOOLS_VERSION}" "llvm-${TOOLS_VERSION}"
+sudo apt-get update && sudo apt-get install -y "clang-${LLVM_VERSION}" "lld-${LLVM_VERSION}" "llvm-${LLVM_VERSION}"
 
 # Create symlinks
-for bin in /usr/bin/*-"${TOOLS_VERSION}"; do
-  target=$(basename "$bin" "-${TOOLS_VERSION}")
+for bin in /usr/bin/*-"${LLVM_VERSION}"; do
+  target=$(basename "$bin" "-${LLVM_VERSION}")
   sudo ln -sf "$bin" "/usr/local/bin/$target"
 done
 
