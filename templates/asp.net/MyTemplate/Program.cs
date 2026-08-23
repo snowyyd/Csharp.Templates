@@ -7,7 +7,7 @@ internal static class Program
 		var builder = WebApplication.CreateBuilder(args);
 
 		// Services
-		// builder.Services.AddControllers();
+		// builder.Services.AddControllers(); // MVC
 		// builder.Services.AddSignalR();
 		// builder.Services.AddOpenApi();
 		builder.Services.AddEndpointsApiExplorer(); // needed for minimal APIs
@@ -16,14 +16,15 @@ internal static class Program
 		builder.WebHost.ConfigureKestrel(static serverOptions => serverOptions.AddServerHeader = false);
 
 		var app = builder.Build();
+
+		app.UseHttpsRedirection();
+		
 		if (app.Environment.IsDevelopment())
 		{
 			// app.MapOpenApi(); // /openapi/v1.json
 			app.UseSwagger(); // /swagger/v1/swagger.json
 			app.UseSwaggerUI(); // /swagger/index.html
 		}
-
-		app.UseHttpsRedirection();
 
 		app.MapGet("/", static () => "Hello World!");
 		app.MapGet("/json", static () =>
@@ -36,6 +37,8 @@ internal static class Program
 
 			return response;
 		});
+
+		// app.MapControllers(); // MVC
 
 		app.Run();
 	}
