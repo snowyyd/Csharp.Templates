@@ -3,7 +3,7 @@
   <Target Name="SetupXWin"
           AfterTargets="SetupOSSpecificProps"
           BeforeTargets="LinkNative"
-          Condition="'$(PublishAot)' == 'true' AND $([MSBuild]::IsOSPlatform(&quot;Linux&quot;)) AND '$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.StartsWith(&quot;win-&quot;))">
+          Condition="'$(PublishAot)' == 'true' AND $([MSBuild]::IsOSPlatform('Linux')) AND '$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.StartsWith('win-'))">
 
     <PropertyGroup>
       <!-- Extract MSVC architecture notation: 'x64', 'arm64', 'x86' -->
