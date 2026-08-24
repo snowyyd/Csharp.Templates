@@ -18,7 +18,7 @@ internal static class Program
 		var app = builder.Build();
 
 		app.UseHttpsRedirection();
-		
+
 		if (app.Environment.IsDevelopment())
 		{
 			// app.MapOpenApi(); // /openapi/v1.json
